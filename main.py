@@ -1,7 +1,5 @@
 import streamlit as st
 from agent import diagnose_symptoms
-import sounddevice as sd
-import scipy.io.wavfile as wav
 import io
 import numpy as np
 from PIL import Image
