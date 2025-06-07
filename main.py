@@ -12,6 +12,13 @@ from image_analysis import analyze_animal_image, get_health_assessment
 import base64
 import random
 
+try:
+    import sounddevice as sd
+    import scipy.io.wavfile as wav
+    SOUNDDEVICE_AVAILABLE = True
+except (ImportError, OSError):
+    SOUNDDEVICE_AVAILABLE = False
+
 def process_diagnosis_result(diagnosis, animal_type):
     """Display the diagnosis result in a formatted box"""
     # Create colored box based on confidence and condition
@@ -290,88 +297,91 @@ with tab1:
                 st.warning("Please describe the symptoms first.")
     
     elif input_method == "Voice":
-        st.markdown("""
-        <div class="symptom-guide">
-            <h4>🎤 Voice Recording Instructions:</h4>
-            <ul>
-                <li>Click 'Start Recording' and speak clearly</li>
-                <li>Describe all symptoms you've noticed</li>
-                <li>Click 'Stop Recording' when finished</li>
-                <li>Maximum recording duration: 10 seconds</li>
-            </ul>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        # Initialize session state variables
-        if 'recording' not in st.session_state:
-            st.session_state.recording = False
-        if 'audio_data' not in st.session_state:
-            st.session_state.audio_data = None
-        if 'recording_started' not in st.session_state:
-            st.session_state.recording_started = False
-        
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            if st.button("Start Recording" if not st.session_state.recording else "Stop Recording"):
-                if not st.session_state.recording:  # Starting recording
-                    st.session_state.recording = True
-                    st.session_state.recording_started = True
-                    st.session_state.audio_data = None
-                    st.rerun()
-                else:  # Stopping recording
-                    st.session_state.recording = False
-                    st.rerun()
-        
-        with col2:
-            if st.session_state.recording:
-                st.write(f"🔴 Recording in progress...")
-                
-                try:
-                    # Record audio using sounddevice
-                    duration = 10  # seconds
-                    fs = 44100  # Sample rate
-                    channels = 1
-                    
-                    # Show countdown
-                    for remaining in range(duration, 0, -1):
-                        st.write(f"Recording... {remaining} seconds remaining")
-                        if remaining == duration:  # Only record on first iteration
-                            recording = sd.rec(int(duration * fs), 
-                                            samplerate=fs, 
-                                            channels=channels, 
-                                            dtype='int16',
-                                            blocking=True)
-                    
-                    st.write("Processing recording...")
-                    
-                    # Create WAV file in memory
-                    wav_buffer = io.BytesIO()
-                    wav.write(wav_buffer, fs, recording)
-                    wav_buffer.seek(0)
-                    audio_data = wav_buffer.read()
-                    
-                    # Store in session state
-                    st.session_state.audio_data = audio_data
-                    st.session_state.recording = False
-                    
-                    # Process the recording
-                    if audio_data is not None:
-                        st.write("Analyzing recording...")
-                        process_diagnosis(audio_data, "voice", animal_type)
-                    else:
-                        st.error("No audio data was recorded")
-                    
-                except Exception as e:
-                    st.error(f"Recording error: {str(e)}")
-                    st.session_state.recording = False
-                    st.session_state.audio_data = None
+        if SOUNDDEVICE_AVAILABLE:
+            st.markdown("""
+            <div class="symptom-guide">
+                <h4>🎤 Voice Recording Instructions:</h4>
+                <ul>
+                    <li>Click 'Start Recording' and speak clearly</li>
+                    <li>Describe all symptoms you've noticed</li>
+                    <li>Click 'Stop Recording' when finished</li>
+                    <li>Maximum recording duration: 10 seconds</li>
+                </ul>
+            </div>
+            """, unsafe_allow_html=True)
             
-            elif st.session_state.recording_started and not st.session_state.recording:
-                if st.session_state.audio_data is not None:
-                    st.success("Recording completed and processed!")
-                else:
-                    st.warning("Recording failed or no audio was captured")
+            # Initialize session state variables
+            if 'recording' not in st.session_state:
+                st.session_state.recording = False
+            if 'audio_data' not in st.session_state:
+                st.session_state.audio_data = None
+            if 'recording_started' not in st.session_state:
+                st.session_state.recording_started = False
+            
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                if st.button("Start Recording" if not st.session_state.recording else "Stop Recording"):
+                    if not st.session_state.recording:  # Starting recording
+                        st.session_state.recording = True
+                        st.session_state.recording_started = True
+                        st.session_state.audio_data = None
+                        st.rerun()
+                    else:  # Stopping recording
+                        st.session_state.recording = False
+                        st.rerun()
+            
+            with col2:
+                if st.session_state.recording:
+                    st.write(f"🔴 Recording in progress...")
+                    
+                    try:
+                        # Record audio using sounddevice
+                        duration = 10  # seconds
+                        fs = 44100  # Sample rate
+                        channels = 1
+                        
+                        # Show countdown
+                        for remaining in range(duration, 0, -1):
+                            st.write(f"Recording... {remaining} seconds remaining")
+                            if remaining == duration:  # Only record on first iteration
+                                recording = sd.rec(int(duration * fs), 
+                                                samplerate=fs, 
+                                                channels=channels, 
+                                                dtype='int16',
+                                                blocking=True)
+                        
+                        st.write("Processing recording...")
+                        
+                        # Create WAV file in memory
+                        wav_buffer = io.BytesIO()
+                        wav.write(wav_buffer, fs, recording)
+                        wav_buffer.seek(0)
+                        audio_data = wav_buffer.read()
+                        
+                        # Store in session state
+                        st.session_state.audio_data = audio_data
+                        st.session_state.recording = False
+                        
+                        # Process the recording
+                        if audio_data is not None:
+                            st.write("Analyzing recording...")
+                            process_diagnosis(audio_data, "voice", animal_type)
+                        else:
+                            st.error("No audio data was recorded")
+                        
+                    except Exception as e:
+                        st.error(f"Recording error: {str(e)}")
+                        st.session_state.recording = False
+                        st.session_state.audio_data = None
+                
+                elif st.session_state.recording_started and not st.session_state.recording:
+                    if st.session_state.audio_data is not None:
+                        st.success("Recording completed and processed!")
+                    else:
+                        st.warning("Recording failed or no audio was captured")
+        else:
+            st.warning("Audio recording is not supported on this platform. Please upload an audio file or use text input.")
     
     else:  # Image input
         st.markdown("""
