@@ -17,7 +17,7 @@ import re
 load_dotenv()
 api_key = os.getenv("GROQ_API_KEY")
 if not api_key:
-    print("Error: GROQ_API_KEY not found in .env file", file=sys.stderr)
+    print("Error: GROQ_API_KEY not found in environment variables", file=sys.stderr)
     sys.exit(1)
 
 # Initialize clients
