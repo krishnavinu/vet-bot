@@ -1,0 +1,30 @@
+[
+    {
+        "name": "Dr. Sharma",
+        "pincode": "500001",
+        "location": "Hyderabad",
+        "specialty": ["cattle", "buffalo", "sheep"],
+        "contact": "+91-96862 93233",
+        "address": "123 Animal Care Center, Banjara Hills, Hyderabad",
+        "available_hours": "9 AM - 6 PM"
+    },
+    {
+        "name": "Dr. Patel",
+        "pincode": "380001",
+        "location": "Ahmedabad",
+        "specialty": ["cattle", "goat"],
+        "contact": "+91-9876543211",
+        "address": "456 Veterinary Clinic, Navrangpura, Ahmedabad",
+        "available_hours": "10 AM - 7 PM"
+    },
+    {
+        "name": "Dr. Kumar",
+        "pincode": "500001",
+        "location": "Hyderabad",
+        "specialty": ["poultry", "sheep", "buffalo"],
+        "contact": "+91-9876543212",
+        "address": "789 Pet Care Hospital, Jubilee Hills, Hyderabad",
+        "available_hours": "8 AM - 5 PM"
+    }
+]
+  

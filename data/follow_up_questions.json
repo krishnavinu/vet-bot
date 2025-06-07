@@ -1,0 +1,144 @@
+{
+    "general_questions": {
+        "eating_habits": [
+            "Has there been any change in appetite?",
+            "Is the animal drinking normal amounts of water?",
+            "When was the last time the animal ate?"
+        ],
+        "drinking_habits": [
+            "Has there been any change in water consumption?",
+            "Is the animal drinking more or less than usual?",
+            "When did you last see the animal drink water?"
+        ],
+        "behavior": [
+            "Has there been any change in behavior?",
+            "Is the animal more lethargic than usual?",
+            "Has there been any change in social interaction?"
+        ],
+        "physical_signs": [
+            "Can you see any wounds or swelling? (Yes/No)",
+            "Is there any discharge from eyes, nose, or mouth? (Yes/No)",
+            "Is the body temperature above normal? (Yes/No)",
+            "Are there any visible changes in the skin? (Yes/No)"
+        ]
+    },
+    "animal_specific": {
+        "cattle": {
+            "mastitis": [
+                "Has milk production decreased? (Yes/No)",
+                "Is the udder hot or hard to touch? (Yes/No)",
+                "Is the milk abnormal in color or texture? (Yes/No)",
+                "Are specific parts of the udder swollen? (Yes/No)"
+            ],
+            "bloat": [
+                "Is the left side visibly swollen? (Yes/No)",
+                "Has the animal stopped ruminating? (Yes/No)",
+                "Did the animal eat fresh, wet grass recently? (Yes/No)",
+                "Is the animal kicking at its belly? (Yes/No)"
+            ],
+            "hoof": [
+                "Is the animal limping? (Yes/No)",
+                "Are any hooves swollen? (Yes/No)",
+                "Is there a foul smell from the hooves? (Yes/No)",
+                "Did the lameness start suddenly? (Yes/No)"
+            ],
+            "udder": [
+                "Is the udder hot to touch?",
+                "Is the milk appearance different than normal?",
+                "Has milk production decreased suddenly?",
+                "Is there visible swelling in the udder?"
+            ],
+            "digestive": [
+                "Is the left side of the belly visibly swollen?",
+                "Has the animal stopped ruminating?",
+                "Is there excessive drooling?",
+                "Is there visible discomfort in the abdominal area?"
+            ],
+            "rumination": [
+                "Is the animal ruminating normally?",
+                "Have you noticed any bloating?"
+            ],
+            "milk_production": [
+                "Has there been a change in milk production?",
+                "Is the milk appearance normal?"
+            ]
+        },
+        "buffalo": {
+            "mastitis": [
+                "Has milk production dropped? (Yes/No)",
+                "Is the udder warm or swollen? (Yes/No)",
+                "Is the milk unusual in appearance? (Yes/No)",
+                "Are parts of the udder harder than others? (Yes/No)"
+            ],
+            "digestive": [
+                "Is there visible bloating? (Yes/No)",
+                "Has the animal stopped chewing cud? (Yes/No)",
+                "Is the animal grinding its teeth? (Yes/No)",
+                "Is the animal showing signs of stomach pain? (Yes/No)"
+            ],
+            "udder": [
+                "Is the udder painful when touched?",
+                "Is the milk watery or discolored?",
+                "Has milk production dropped by more than half?",
+                "Are there hard lumps in the udder?"
+            ]
+        },
+        "sheep": {
+            "respiratory": [
+                "Is the animal coughing? (Yes/No)",
+                "Is there nasal discharge? (Yes/No)",
+                "Is the breathing unusually fast? (Yes/No)",
+                "Are other sheep showing similar symptoms? (Yes/No)"
+            ],
+            "parasites": [
+                "Is there visible wool loss? (Yes/No)",
+                "Is the animal scratching frequently? (Yes/No)",
+                "Has it been over 3 months since deworming? (Yes/No)",
+                "Is there diarrhea? (Yes/No)"
+            ]
+        },
+        "goat": {
+            "digestive": [
+                "Has the goat stopped ruminating? (Yes/No)",
+                "Is the stomach visibly swollen? (Yes/No)",
+                "Is there watery diarrhea? (Yes/No)",
+                "Is there teeth grinding? (Yes/No)"
+            ],
+            "respiratory": [
+                "Is there frequent coughing? (Yes/No)",
+                "Is there nasal discharge? (Yes/No)",
+                "Are other goats also coughing? (Yes/No)",
+                "Is the breathing faster than normal? (Yes/No)"
+            ]
+        },
+        "poultry": {
+            "respiratory": [
+                "Are the birds sneezing or coughing? (Yes/No)",
+                "Has feed consumption decreased? (Yes/No)",
+                "Is there discharge from eyes or nose? (Yes/No)",
+                "Are multiple birds affected? (Yes/No)"
+            ],
+            "egg_production": [
+                "Has egg production changed?",
+                "Are the eggs normal in appearance?"
+            ],
+            "flock_behavior": [
+                "Is the bird separated from the flock?",
+                "Are other birds showing similar symptoms?"
+            ]
+        }
+    },
+    "emergency_indicators": {
+        "severe_symptoms": [
+            "Is the animal able to stand?",
+            "Is there any difficulty breathing?",
+            "Is there any visible bleeding?"
+        ],
+        "critical_signs": [
+            "Is the temperature extremely abnormal? (Yes/No)",
+            "Are the gums pale or bluish? (Yes/No)",
+            "Is there severe swelling anywhere? (Yes/No)",
+            "Has the animal stopped eating and drinking? (Yes/No)"
+        ]
+    }
+} 
